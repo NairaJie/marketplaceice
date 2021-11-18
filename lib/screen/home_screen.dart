@@ -49,44 +49,46 @@ class HomeScreen extends StatelessWidget {
               crossAxisCount: 2,
               shrinkWrap: true,
               children: iceList.map((ice) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return DetailScreen(ice: ice);
-                        }));
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: Image.network(ice.iceImage, width: 150, height: 150),
-                            decoration: BoxDecoration(color: ice.iceColor),
+                return Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return DetailScreen(ice: ice);
+                          }));
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              child: Image.network(ice.iceImage, width: 150, height: 150),
+                              decoration: BoxDecoration(color: ice.iceColor),
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 4, left: 4),
-                        child: Text(
-                          ice.iceName,
-                          style: TextStyle(fontSize: 16),
+                        Container(
+                          margin: EdgeInsets.only(top: 4, left: 4),
+                          child: Text(
+                            ice.iceName,
+                            style: TextStyle(fontSize: 16),
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 4, left: 4),
-                        child: Text(
-                          rupiahCurrencyFormat.format(ice.icePrice),
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
+                        Container(
+                          margin: EdgeInsets.only(top: 4, left: 4),
+                          child: Text(
+                            rupiahCurrencyFormat.format(ice.icePrice),
+                            style: TextStyle(
+                                color: Colors.black, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               }).toList(),
