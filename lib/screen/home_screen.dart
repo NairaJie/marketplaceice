@@ -44,7 +44,6 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
         child: Material(
           color: Colors.transparent,
-          child: Expanded(
             child: GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
@@ -60,15 +59,17 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              child: Image.network(ice.iceImage, width: 150, height: 150),
-                              decoration: BoxDecoration(color: ice.iceColor),
+                        Expanded(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                child: Image.network(ice.iceImage,),
+                                decoration: BoxDecoration(color: ice.iceColor),
+                              ),
                             ),
                           ),
                         ),
@@ -95,7 +96,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 
