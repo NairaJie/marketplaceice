@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:marketplaceice/model/ice.dart';
 import 'package:marketplaceice/model/cart.dart';
+import 'package:marketplaceice/screen/cart_screen.dart';
+import 'package:marketplaceice/screen/checkout_screen.dart';
 import 'package:marketplaceice/util/badge.dart';
 import 'package:marketplaceice/util/widget.dart';
+import 'package:collection/collection.dart';
 
 class DetailScreen extends StatefulWidget {
   final Ice ice;
@@ -46,16 +49,22 @@ class _DetailScreenState extends State<DetailScreen> {
                             Navigator.pop(context);
                           },
                         ),
-                        Stack(
+                        Stack(alignment: Alignment.topRight,
                           children: [
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return CartScreen();
+                                      })).then((value) => setState(() {}));
+                                },
                                 icon: Icon(
                                   Icons.shopping_cart_outlined,
                                   color: Colors.black,
                                 )),
                             cartList.length > 0
-                                ? Badge(numberValue:(cartList.length).toString())
+                                ? Badge(
+                                numberValue: (cartList.length).toString())
                                 : Container()
                           ],
                         )
@@ -123,7 +132,9 @@ class _DetailScreenState extends State<DetailScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  addToCart(widget.ice.iceId, context);
+                                },
                                 style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.all(14.0),
                                     primary: Color.fromARGB(0, 255, 255, 255)),
@@ -136,7 +147,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                         primary:
                                         Color.fromARGB(1000, 4, 93, 42),
                                         padding: EdgeInsets.all(16.0)),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                        return CheckoutScreen();
+                                      }));
+                                    },
                                     child: Text(
                                       'Buy Now',
                                       style: TextStyle(color: Colors.white),
@@ -156,4 +171,26 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
     );
   }
+  void addToCart(iceId, context) {
+    bool isItemExist = false;
+    if (cartList.firstWhereOrNull((cartItem) => cartItem.iceId == iceId) !=
+        null) {
+      isItemExist = true;
+    }
+    if(isItemExist){
+      final snackBar = SnackBar(content: Text('Item already in cart !'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }else{
+      setState(() {
+        cartList.add(Cart(iceId: iceId));
+      });
+      final snackBar = SnackBar(content: Text('Item added to cart !'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 }
+
+
+
+
+

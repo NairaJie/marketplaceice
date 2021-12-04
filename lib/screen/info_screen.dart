@@ -33,10 +33,10 @@ class InfoScreen extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Veronica Putri',
+                  'Naia',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Text('Citra Indah City')
+                Text('Batam city')
               ],
             ),
           ),
